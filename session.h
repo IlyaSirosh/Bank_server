@@ -17,8 +17,8 @@ public:
     QString withdraw(const int);
 
 private:
-    Bank * _bank;
-    QString _cardNumber;
+    Bank *   _bank;
+    QString  _cardNumber;
     QString  _pin;
 };
 

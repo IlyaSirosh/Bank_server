@@ -18,7 +18,6 @@ public:
     //Session* createSession(const QString&,const QString&) const;
     QString getBalance(const QString&);
     QString withdraw(const QString&, const int);
-
 private:
 
     QString _bankName;

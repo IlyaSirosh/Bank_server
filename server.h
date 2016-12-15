@@ -5,7 +5,7 @@
 #include <QTcpSocket>
 #include <QTcpServer>
 #include <QDebug>
-
+#include "bank.h"
 
 class Server : public QObject
 {
@@ -15,6 +15,7 @@ public:
     ~Server();
 
     void start(int port);
+    QString bankName = "Privat";
 
 signals:
 
@@ -23,6 +24,7 @@ public slots:
 
 private:
     QTcpServer *_server;
+    Bank _bank;
 };
 
 #endif // SERVER_H
