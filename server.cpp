@@ -33,40 +33,42 @@ void Server::newConnection(){
 
     bool connected = true;
 
-    QString data;
-
     QStringList list;
 
-    Session session;
+    Session * session;
 
 <<<<<<< Updated upstream
     while(connected){
-        data = _server->readAll();
+        socket->waitForReadyRead(5000);
+        QString data(socket->readAll());
         list = data.split(":");
-        switch(list.at(0))
-        {
-            case "01":
-                if(_bank.validate(list.at(1))){
-                    session(list.at(1));
-                    server->write("1");
+        QString operation = list.at(0);
+        if(operation == "01"){
+                if(_bank.validateAccount(list.at(1))){
+                    session=new Session(&_bank, list.at(1));
+                    response("1",socket);
                 }
                 else{
-                    server->write("0");
+                    response("0",socket);
                 }
-            case "02":
-                if(session.validatePin(list.at(1))){
-                    server->write("1");
+        }
+        if(operation == "02"){
+                if(session->validatePin(list.at(1))){
+                    response("1",socket);
                 }
                 else{
-                    server->write("0");
+                    response("0",socket);
                 }
-            case "03":
-                server->write(session.getBalance());
-            case "04":
-                server->write(session.withDraw(list.at(1)));
-            case "04":
-                server->close();
-            server->flush();
+        }
+       if(operation == "03"){
+            response(session->getBalance(),socket);
+       }
+       if(operation == "04"){
+           response(session->withDraw(list.at(1)),socket);
+       }
+       if(operation == "05"){
+            socket->close();
+            socket->flush();
         }
 
         connected = false;
@@ -83,4 +85,10 @@ void Server::newConnection(){
 Server::~Server(){
     _server->close();
     _server = 0;
+}
+void Server::response(const QString & message, QTcpSocket * socket)
+{
+    QByteArray arr;
+    arr.append(message);
+    socket->write(arr);
 }

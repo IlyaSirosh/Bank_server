@@ -9,12 +9,11 @@ class Session:public QObject
     Q_OBJECT
 public:
 
-    //struct BadSession;
-    Session (Bank*, const QString&, const QString&);
+    Session (Bank*, const QString&);
     ~Session();
-    QString validatePin(const QString&)const;
+    bool validatePin(const QString&)const;
     QString getBalance();
-    QString withdraw(const int);
+    QString withdraw(QString);
 
 private:
     Bank *   _bank;

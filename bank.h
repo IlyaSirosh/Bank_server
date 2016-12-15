@@ -14,10 +14,9 @@ public:
     explicit Bank (const QString&);
     Bank (const Bank&);
     ~Bank();
-    QString validateAccount(const QString&, const QString&) const;
-    //Session* createSession(const QString&,const QString&) const;
+    bool validateAccount(const QString&) const;
     QString getBalance(const QString&);
-    QString withdraw(const QString&, const int);
+    QString withdraw(const QString&, const QString&);
 private:
 
     QString _bankName;

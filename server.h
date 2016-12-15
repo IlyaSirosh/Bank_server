@@ -16,6 +16,7 @@ public:
 
     void start(int port);
     QString bankName = "Privat";
+    void response(const QString &, QTcpSocket *);
 
 signals:
 

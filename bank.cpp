@@ -21,11 +21,10 @@ Bank::~Bank()
 
 }
 
-QString Bank::validateAccount(const QString& cardNumber, const QString& pin) const{
+bool Bank::validateAccount(const QString& cardNumber) const{
 
     QFile file("Accounts.txt");
     if(!file.open(QIODevice::ReadOnly)) {
-        //QMessageBox::information(0, "error", file.errorString());
     }
 
     QTextStream in(&file);
@@ -34,20 +33,15 @@ QString Bank::validateAccount(const QString& cardNumber, const QString& pin) con
         QString line = in.readLine();
         QStringList fields = line.split(" ");
         if(fields.at(0)==cardNumber)
-            return "01";
+            return true;
     }
     file.close();
-    return "00";
+    return false;
 }
-
-//Session* Bank::createSession(const QString& cardNumber, const QString& pin)const{
-//    return new Session(this, cardNumber, pin);
-//}
 
 QString Bank::getBalance(const QString& cardNumber){
     QFile file("Accounts.txt");
     if(!file.open(QIODevice::ReadOnly)) {
-        //QMessageBox::information(0, "error", file.errorString());
     }
 
     QTextStream in(&file);
@@ -62,10 +56,9 @@ QString Bank::getBalance(const QString& cardNumber){
     return "00";
 }
 
-QString Bank::withdraw(const QString& cardNumber, const int){
+QString Bank::withdraw(const QString& cardNumber, const  QString& sum){
     QFile file("Accounts.txt");
     if(!file.open(QIODevice::ReadWrite)) {
-        //QMessageBox::information(0, "error", file.errorString());
     }
 
     QTextStream in(&file);

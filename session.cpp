@@ -3,10 +3,9 @@
 
 
 
-Session::Session (Bank* bank , const QString& cardNumber,const QString& pin):
+Session::Session (Bank* bank , const QString& cardNumber):
     _bank(bank),
-    _cardNumber(cardNumber),
-    _pin(pin)
+    _cardNumber(cardNumber)
 {
 
 }
@@ -17,16 +16,16 @@ Session::~Session()
 
 }
 
-QString Session::validatePin(const QString& pin) const{
-    if(_pin == pin)return "01";
-    return "00";
+bool Session::validatePin(const QString& pin) const{
+    if(_pin == pin)return true;
+    return false;
 }
 
 QString Session::getBalance(){
     return _bank->getBalance(_cardNumber);
 }
 
-QString Session::withdraw(const int sum){
+QString Session::withdraw(QString sum){
     return _bank->withdraw(_cardNumber, sum);
 }
 
