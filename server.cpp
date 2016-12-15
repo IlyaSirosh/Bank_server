@@ -37,7 +37,7 @@ void Server::newConnection(){
 
     Session * session;
 
-<<<<<<< Updated upstream
+
     while(connected){
         socket->waitForReadyRead(5000);
         QString data(socket->readAll());
@@ -64,7 +64,7 @@ void Server::newConnection(){
             response(session->getBalance(),socket);
        }
        if(operation == "04"){
-           response(session->withDraw(list.at(1)),socket);
+           response(session->withdraw(list.at(1)),socket);
        }
        if(operation == "05"){
             socket->close();
@@ -72,9 +72,7 @@ void Server::newConnection(){
         }
 
         connected = false;
-=======
 
->>>>>>> Stashed changes
     }
 
     socket->flush();
