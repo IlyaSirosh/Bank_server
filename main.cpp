@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 
     Server server;
 
-    server.start(1234);
+    server.start(3333);
 
     //Bank bank("aaa");
 

@@ -2,7 +2,9 @@ QT += core
 QT += network
 QT -= gui
 
+
 CONFIG += c++11
+
 
 TARGET = Bank_server
 CONFIG += console

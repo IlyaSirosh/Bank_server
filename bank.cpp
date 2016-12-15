@@ -1,5 +1,7 @@
 #include "bank.h"
-
+#include <QFile>
+#include <QTextStream>
+//#include <QtWidgets/QMessageBox>
 
 Bank::Bank(const QString& name)
     :_bankName(name)
@@ -19,11 +21,11 @@ Bank::~Bank()
 
 }
 
-QString Bank::validateAccount(const QString& cardNumber, const int pin) const{
+QString Bank::validateAccount(const QString& cardNumber, const QString& pin) const{
 
     QFile file("Accounts.txt");
     if(!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::information(0, "error", file.errorString());
+        //QMessageBox::information(0, "error", file.errorString());
     }
 
     QTextStream in(&file);
@@ -38,14 +40,14 @@ QString Bank::validateAccount(const QString& cardNumber, const int pin) const{
     return "00";
 }
 
-Session* Bank::createSession(const QString& cardNumber, const int pin)const{
-    return new Session(this*, cardNumber, pin);
-}
+//Session* Bank::createSession(const QString& cardNumber, const QString& pin)const{
+//    return new Session(this, cardNumber, pin);
+//}
 
-int Bank::getBalance(const QString&){
+QString Bank::getBalance(const QString& cardNumber){
     QFile file("Accounts.txt");
     if(!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::information(0, "error", file.errorString());
+        //QMessageBox::information(0, "error", file.errorString());
     }
 
     QTextStream in(&file);
@@ -60,10 +62,10 @@ int Bank::getBalance(const QString&){
     return "00";
 }
 
-char* Bank::withdraw(const QString&, const int){
+QString Bank::withdraw(const QString& cardNumber, const int){
     QFile file("Accounts.txt");
     if(!file.open(QIODevice::ReadWrite)) {
-        QMessageBox::information(0, "error", file.errorString());
+        //QMessageBox::information(0, "error", file.errorString());
     }
 
     QTextStream in(&file);

@@ -2,19 +2,22 @@
 #define BANK_H
 #include <QObject>
 
-friend class Session;
+//class Session;
+
 
 class Bank:public QObject
 {
+    Q_OBJECT
 public:
 
-    Bank (const QString&);
+    //friend class Session;
+    explicit Bank (const QString&);
     Bank (const Bank&);
     ~Bank();
-    bool validateAccount(const QString&, const QString&) const;
-    Session* createSession(const QString&,const int) const;
-    int getBalance(const QString&);
-    char* withdraw(const QString&, const int);
+    QString validateAccount(const QString&, const QString&) const;
+    //Session* createSession(const QString&,const QString&) const;
+    QString getBalance(const QString&);
+    QString withdraw(const QString&, const int);
 
 private:
 
