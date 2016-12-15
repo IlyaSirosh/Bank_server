@@ -11,7 +11,14 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    server.cpp
+    server.cpp \
+    bank.cpp \
+    session.cpp
 
 HEADERS += \
-    server.h
+    server.h \
+    bank.h \
+    session.h
+
+DISTFILES += \
+    Accounts.txt
