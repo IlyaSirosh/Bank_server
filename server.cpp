@@ -39,6 +39,7 @@ void Server::newConnection(){
 
     Session session;
 
+<<<<<<< Updated upstream
     while(connected){
         data = _server->readAll();
         list = data.split(":");
@@ -69,6 +70,9 @@ void Server::newConnection(){
         }
 
         connected = false;
+=======
+
+>>>>>>> Stashed changes
     }
 
     socket->flush();
