@@ -17,10 +17,19 @@ public:
     bool validateAccount(const QString&) const;
     QString getBalance(const QString&);
     QString withdraw(const QString&, const QString&);
+    bool validatePin(const QString&, const QString&);
 private:
 
     QString _bankName;
-
+    class Account{
+        public:
+        QString _card;
+        QString _pin;
+        QString _balance;
+            Account(QString card,QString pin,QString balance);
+            ~Account(){}
+    };
+    QList<Account> accounts;
 };
 
 #endif

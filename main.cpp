@@ -7,11 +7,9 @@ int main(int argc, char *argv[])
 
     Server server;
 
-    server.start(3333);
+    server.start(9999);
 
-    //Bank bank("aaa");
 
-    //bank.validateAccount("aaa","bbb");
 
     return a.exec();
 }

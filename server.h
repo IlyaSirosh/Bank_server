@@ -7,6 +7,7 @@
 #include <QDebug>
 #include "bank.h"
 
+
 class Server : public QObject
 {
     Q_OBJECT

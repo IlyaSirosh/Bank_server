@@ -1,5 +1,5 @@
 #include "session.h"
-
+#include <QDebug>
 
 
 
@@ -17,8 +17,7 @@ Session::~Session()
 }
 
 bool Session::validatePin(const QString& pin) const{
-    if(_pin == pin)return true;
-    return false;
+    return _bank->validatePin(_cardNumber, pin);
 }
 
 QString Session::getBalance(){

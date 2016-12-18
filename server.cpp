@@ -1,5 +1,6 @@
 #include "server.h"
 #include "session.h"
+#include <QDebug>
 
 Server::Server(QObject *parent) : QObject(parent), _bank(bankName)
 {
@@ -31,6 +32,8 @@ void Server::newConnection(){
 
     QTcpSocket *socket = _server->nextPendingConnection();
 
+    qDebug()<<"newConnection"<<endl;
+
     bool connected = true;
 
     QStringList list;
@@ -44,6 +47,8 @@ void Server::newConnection(){
         list = data.split(":");
         QString operation = list.at(0);
         if(operation == "01"){
+
+            qDebug()<<"try to check card"<<endl;
                 if(_bank.validateAccount(list.at(1))){
                     session=new Session(&_bank, list.at(1));
                     response("1",socket);
@@ -67,11 +72,11 @@ void Server::newConnection(){
            response(session->withdraw(list.at(1)),socket);
        }
        if(operation == "05"){
-            socket->close();
-            socket->flush();
+
+            connected = false;
         }
 
-        connected = false;
+
 
     }
 
